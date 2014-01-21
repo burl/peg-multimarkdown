@@ -13,6 +13,7 @@ enum markdown_extensions {
     EXT_COMPATIBILITY    = 1 << 4,
     EXT_PROCESS_HTML     = 1 << 5,
 	EXT_NO_LABELS		 = 1 << 6,
+    EXT_PANDOC_LABELS    = 1 << 7,
 };
 
 enum markdown_formats {

@@ -281,6 +281,9 @@ char *label_from_string(char *str, bool obfuscate) {
             {
                 g_string_append_c(out, tolower(*str));
             }           
+            else if (extension(EXT_PANDOC_LABELS)) {
+                g_string_append_c(out, '-');
+            }
         } else {
         /* need alpha as first character */
             if ((*str >= 'A' && *str <= 'Z') || (*str >= 'a' && *str <= 'z'))

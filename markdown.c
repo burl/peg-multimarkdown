@@ -80,6 +80,7 @@ Syntax extensions\n\
   --notes --nonotes       toggle notes extension\n\
   --process-html          process MultiMarkdown inside of raw HTML\n\
   --nolabels              do not generate id attributes for headers\n\
+  --pandoc-labels         generate pandoc autolabel-comaptible labels\n\
 \n\
 Converts text in specified files (or stdin) from markdown to FORMAT.\n\
 Available FORMATs:  html, latex, memoir, beamer, odf, opml\n");
@@ -119,6 +120,7 @@ int main(int argc, char * argv[]) {
     static gboolean opt_batchmode = FALSE;
     static gchar *opt_extract_meta = FALSE;
     static gboolean opt_no_labels = FALSE;
+    static gboolean opt_pandoc_labels = FALSE;
 
 	static struct option entries[] =
 	{
@@ -138,6 +140,7 @@ int main(int argc, char * argv[]) {
       MD_ARGUMENT_FLAG( "nonotes", 0, 1, &opt_no_notes, "do not use notes extension", NULL ),
       MD_ARGUMENT_FLAG( "process-html", 0, 1, &opt_process_html, "process MultiMarkdown inside of raw HTML", NULL ),
       MD_ARGUMENT_FLAG( "nolabels", 0, 1, &opt_no_labels, "do not generate id attributes for headers", NULL ),
+      MD_ARGUMENT_FLAG( "pandoc-labels", 0, 1, &opt_pandoc_labels, "generate pandoc autolabel-comaptible labels", NULL),
       { NULL }
     };
 
@@ -208,6 +211,8 @@ int main(int argc, char * argv[]) {
         extensions = extensions | EXT_FILTER_STYLES;
     if (opt_no_labels)
         extensions = extensions | EXT_NO_LABELS;
+    if (opt_pandoc_labels)
+        extensions = extensions | EXT_PANDOC_LABELS;
 
     /* Compatibility mode turns off extensions and most 
         MultiMarkdown-specific features */
